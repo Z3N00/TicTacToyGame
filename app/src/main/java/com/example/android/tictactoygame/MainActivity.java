@@ -173,23 +173,29 @@ public class MainActivity extends AppCompatActivity {
         if(Winner==1){
 
             Toast.makeText(this,"Player 1 is Winner",Toast.LENGTH_SHORT).show();
-            new Handler().postDelayed(new Runnable() {
+            Runnable runnable=new Runnable() {
                 @Override
                 public void run() {
-                    setContentView(R.layout.activity_launch);
+                    startActivity(new Intent(MainActivity.this,LaunchActivity.class));
+                    finish();
                 }
-            },3000);
+            };
+            Handler handler=new Handler();
+            handler.postDelayed(runnable,3000);
              return true;
 
         }
         else if(Winner==2){
             Toast.makeText(this,"Player 2 is Winner",Toast.LENGTH_SHORT).show();
-            new Handler().postDelayed(new Runnable() {
+            Runnable runnable=new Runnable() {
                 @Override
                 public void run() {
-                    setContentView(R.layout.activity_launch);
+                    startActivity(new Intent(MainActivity.this,LaunchActivity.class));
+                    finish();
                 }
-            },3000);
+            };
+            Handler handler=new Handler();
+            handler.postDelayed(runnable,3000);
             return true;
         }
 
