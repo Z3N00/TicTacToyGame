@@ -2,6 +2,7 @@ package com.example.android.tictactoygame;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -87,7 +88,7 @@ public class Main2Activity extends AppCompatActivity {
             Player1.add(CellID);
             activePlayer=2;
 
-            //   AutoPlay();
+
 
         }else if (activePlayer==2){
             buttonSelected.setText("0");
@@ -98,14 +99,20 @@ public class Main2Activity extends AppCompatActivity {
         buttonSelected.setEnabled(false);
 
         CheckWinner();
+
+
+
     }
 
-    void CheckWinner(){
+
+
+    boolean CheckWinner(){
         int Winner=-1;
 
         //row 1
         if (Player1.contains(1)&&Player1.contains(2)&&Player1.contains(3)){
             Winner=1;
+
         }
         if (Player2.contains(1)&&Player2.contains(2)&&Player2.contains(3)){
             Winner=2;
@@ -168,74 +175,31 @@ public class Main2Activity extends AppCompatActivity {
         }
         if(Winner==1){
             Toast.makeText(this,"Player 1 is Winner",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setContentView(R.layout.activity_launch);
+                }
+            },3000);
+
+            return true;
         }
         else if(Winner==2){
             Toast.makeText(this,"Player 2 is Winner",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setContentView(R.layout.activity_launch);
+                }
+            },3000);
+
+            return true;
         }
+        return false;
     }
 
 
-    void AutoPlay(){
-        ArrayList<Integer> emptyCell=new ArrayList<Integer>(); //all unselected cell
-
-        //find empty cell
-
-        for(int CellID = 1;CellID<10;CellID++){
-            if(!(Player1.contains(CellID)||(Player2.contains(CellID)))){
-                emptyCell.add(CellID);
-            }
-        }
-
-        Random random=new Random();
-        int randomIndex=random.nextInt(emptyCell.size()-0)+0;  // if size =3 , select (0,1,2)
-        int CellID=emptyCell.get(randomIndex);
-
-        Button buttonSelected;
-
-        switch (CellID){
-
-            case 1 :
-                buttonSelected=findViewById(R.id.button1);
-                break;
-
-            case 2 :
-                buttonSelected=findViewById(R.id.button2);
-                break;
-
-            case 3 :
-                buttonSelected=findViewById(R.id.button3);
-                break;
-
-            case 4 :
-                buttonSelected=findViewById(R.id.button4);
-                break;
-
-            case 5 :
-                buttonSelected=findViewById(R.id.button5);
-                break;
-
-            case 6 :
-                buttonSelected=findViewById(R.id.button6);
-                break;
-
-            case 7 :
-                buttonSelected=findViewById(R.id.button7);
-                break;
-
-            case 8 :
-                buttonSelected=findViewById(R.id.button8);
-                break;
-
-            case 9 :
-                buttonSelected=findViewById(R.id.button9);
-                break;
-
-            default:
-                buttonSelected=findViewById(R.id.button1);
-        }
-
-        PlayGame(CellID,buttonSelected);
-    }
 }
+
 
 

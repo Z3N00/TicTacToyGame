@@ -1,6 +1,8 @@
 package com.example.android.tictactoygame;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,26 +80,31 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ButtonText",buttonSelected.getText().toString());
         Log.d("ButtonColour",buttonSelected.getBackground().toString());
 
-        if(activePlayer==1){
+        if(activePlayer==1) {
             buttonSelected.setText("X");
-            buttonSelected.setBackgroundColor(Color.GREEN );
+            buttonSelected.setBackgroundColor(Color.GREEN);
             Player1.add(CellID);
-            activePlayer=2;
+            activePlayer = 2;
 
             AutoPlay();
+        }
 
-        }else if (activePlayer==2){
+        else if (activePlayer==2){
             buttonSelected.setText("0");
             buttonSelected.setBackgroundColor(Color.YELLOW);
            Player2.add(CellID);
             activePlayer=1;
         }
-        buttonSelected.setEnabled(false);
 
+        buttonSelected.setEnabled(false);
         CheckWinner();
+
+
     }
 
-    void CheckWinner(){
+
+
+    boolean CheckWinner(){
         int Winner=-1;
 
         //row 1
@@ -164,11 +171,29 @@ public class MainActivity extends AppCompatActivity {
             // we have winner
         }
         if(Winner==1){
+
             Toast.makeText(this,"Player 1 is Winner",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setContentView(R.layout.activity_launch);
+                }
+            },3000);
+             return true;
+
         }
         else if(Winner==2){
             Toast.makeText(this,"Player 2 is Winner",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setContentView(R.layout.activity_launch);
+                }
+            },3000);
+            return true;
         }
+
+            return false;
     }
 
 
