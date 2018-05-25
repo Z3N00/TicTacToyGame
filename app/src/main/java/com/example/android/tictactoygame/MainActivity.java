@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             Player1.add(CellID);
             activePlayer=2;
 
-         //   AutoPlay();
+            AutoPlay();
 
         }else if (activePlayer==2){
             buttonSelected.setText("0");
